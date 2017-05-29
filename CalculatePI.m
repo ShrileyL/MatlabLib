@@ -1,4 +1,4 @@
-%if-else Test
+%% if-else Test
 a = input('Enter a:');
 b = input('Enter b:');
 c = input('Enter c:');
@@ -14,7 +14,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %calculate Pi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%for-loop Test
+%% for-loop Test
 N1 = 0;
 n = input('Number: ');
 for k = 1:n;
@@ -23,7 +23,7 @@ for k = 1:n;
 end
 rho_n = 4*N1/(n^2);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%error compare
+%% error compare
 n = input('Please enter number: ');
 p = 0;
 t = 0;
@@ -42,7 +42,7 @@ end
 fprintf('erro1 = %1.5f\n',error1);
 fprintf('erro2 = %1.5f\n',error2);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Pi Via Polygons
+%% Pi Via Polygons
 
 % Input the iteration parameters...
 clc
@@ -73,7 +73,7 @@ fprintf(' rho_nStar = %20.15f\n Pi        = %20.15f\n',...
             
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Pi Via Tiling
+%% Pi Via Tiling
 
 % Enter the disk radius...
 clc
@@ -93,3 +93,43 @@ clc
 fprintf('n      = %1d\n',n)
 fprintf('rho_n  = %12.8f\n',rho_n)
 fprintf('Error  = %12.8f\n',abs(pi-rho_n))
+
+%% Pi Via frac
+%clear the command window and acquire M
+clc
+M = input('Enter M: ');
+pBest = 1;
+qBest = 1;
+err_pq = pi - 1;
+for q = 1:M
+    for p = 1:M
+        if(abs(p/q - pi) < err_pq)
+            pBest = p;
+            qBest = q;
+            err_pq = abs(p/q - pi);
+        end
+    end
+end
+MyPi = pBest/qBest;
+fprintf('M=%1d\npBest=%1d\nqBest=%1d\n',M,pBest,qBest);
+fprintf('MyPi=%17.15f\npi=%17.15f\nerror=%17.15f\n',MyPi,pi,err_pq); 
+
+%% Pi Via frac(faster)
+%clear the command window and acquire M
+clc
+M = input('Enter M: ');
+pBest = 1;
+qBest = 1;
+err_pq = pi - 1;
+for q = 1:ceil(M/pi)
+    for p = floor(pi*q):ceil(pi*q)
+        if(abs(p/q - pi) < err_pq)
+            pBest = p;
+            qBest = q;
+            err_pq = abs(p/q - pi);
+        end
+    end
+end
+MyPi = pBest/qBest;
+fprintf('M=%1d\npBest=%1d\nqBest=%1d\n',M,pBest,qBest);
+fprintf('MyPi=%17.15f\npi=%17.15f\nerror=%17.15f\n',MyPi,pi,err_pq); 
