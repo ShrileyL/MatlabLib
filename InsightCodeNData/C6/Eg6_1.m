@@ -8,12 +8,16 @@ n = 10000; rand('seed',0); randn('seed',0);
 x = -1+2*rand(n,1);
 y = -1+2*rand(n,1);
 Hits = 0;
+%
 for k=1:n
     % Check the k-th dart throw...
     if x(k)^2 + y(k)^2 <= 1
         Hits = Hits + 1;
     end
 end
+% simplify: 
+% S = (x.^2+y.^2<=ones(n,1));
+% hits = sum(S);
 piEstU = 4*(Hits/n);
 
 % Throw Darts with Aiming...
